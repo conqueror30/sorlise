@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SorLise
 
-## Getting Started
+**LGS'ye hazırlanan 8. sınıf öğrencilerini seçkin liselerdeki gönüllü öğrencilerle buluşturan Türkiye'nin ilk akran-rehberlik platformu.**
 
-First, run the development server:
+Ücretsiz · Güvenli · Bire bir
+
+---
+
+## Teknoloji
+
+- [Next.js](https://nextjs.org/) — App Router
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Framer Motion](https://www.framer.com/motion/)
+- Google Sheets (form backend)
+
+## Kurulum
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Uygulama `http://localhost:3000` adresinde çalışır.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Ortam Değişkenleri
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`.env.local.example` dosyasını `.env.local` olarak kopyala ve değerleri doldur:
 
-## Learn More
+```bash
+cp .env.local.example .env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+| Değişken | Açıklama |
+|----------|----------|
+| `APPS_SCRIPT_URL` | Google Apps Script web app URL'i |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Sayfalar
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Sayfa | Açıklama |
+|-------|----------|
+| `/` | Ana sayfa |
+| `/kayit` | Aday öğrenci kayıt formu |
+| `/mentor-ol` | Gönüllü başvuru formu |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2025 SorLise
