@@ -2,18 +2,28 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
-const navLinks = [
+const mainLinks = [
   { label: "Nasıl Çalışır", href: "#nasil-calisir" },
+  { label: "Öğrenciler İçin", href: "/ogrenciler" },
   { label: "Gönüllüler", href: "#mentorlar" },
   { label: "Okullar İçin", href: "#okullar" },
-  { label: "Hakkında", href: "#hakkinda" },
+];
+
+const ogrencilerLinks = [
+  { label: "Ana Sayfa", href: "/" },
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isOgrenciler = pathname === "/ogrenciler";
+  const navLinks = isOgrenciler ? ogrencilerLinks : mainLinks;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -32,10 +42,14 @@ export function Navbar() {
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center select-none">
-          <span className="text-xl font-extrabold tracking-tight">
-            <span className="text-brand-dark">Sor</span>
-            <span className="text-ink">Lise</span>
-          </span>
+          <Image
+            src="/isimli_logo.png"
+            alt="SorLise"
+            width={140}
+            height={140}
+            className="h-[140px] w-auto -my-[38px]"
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}
@@ -54,16 +68,16 @@ export function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
           <Link
-            href="/kayit"
+            href="/mentor-ol"
             className="text-sm font-medium text-muted hover:text-ink transition-colors px-3 py-2"
           >
-            Giriş Yap
+            Gönüllü Ol
           </Link>
           <Link
-            href="/kayit"
+            href="/ogrenciler"
             className="text-sm font-semibold bg-brand text-ink px-4 py-2 rounded-xl hover:bg-brand-dark transition-colors"
           >
-            Ücretsiz Başla
+            Hemen İndir
           </Link>
         </div>
 
@@ -91,7 +105,7 @@ export function Navbar() {
             </Link>
           ))}
           <Link
-            href="/kayit"
+            href="/ogrenciler"
             className="text-sm font-semibold bg-brand text-ink px-4 py-3 rounded-xl text-center hover:bg-brand-dark transition-colors"
             onClick={() => setMobileOpen(false)}
           >

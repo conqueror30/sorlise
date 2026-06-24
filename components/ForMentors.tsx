@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { CheckCircle } from "lucide-react";
 
 const benefits = [
@@ -20,32 +21,13 @@ function BadgeMockup() {
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       >
-        <div className="w-20 h-20 rounded-2xl bg-brand flex items-center justify-center mb-5">
-          <svg width="42" height="42" viewBox="0 0 46 46" aria-hidden>
-            <path
-              d="M23 3 L41 9 V24 C41 34 33 40 23 43 C13 40 5 34 5 24 V9 Z"
-              fill="#B388F5"
-              opacity="0.35"
-            />
-            <path
-              d="M23 3 L41 9 V24 C41 34 33 40 23 43 C13 40 5 34 5 24 V9 Z"
-              stroke="#7C3AED"
-              strokeWidth="1.5"
-              fill="none"
-            />
-            <text
-              x="23"
-              y="29"
-              textAnchor="middle"
-              fontFamily="Georgia, serif"
-              fontWeight="700"
-              fontSize="13"
-              fill="#7C3AED"
-            >
-              SL
-            </text>
-          </svg>
-        </div>
+        <Image
+          src="/logo.png"
+          alt="SorLise Badge"
+          width={120}
+          height={120}
+          className="w-24 h-24 mb-5 object-contain"
+        />
         <p className="font-bold text-ink text-sm">Aktif Gönüllü</p>
         <p className="text-xs text-muted mt-1">SorLise Gönüllüsü</p>
         <div className="mt-4 flex gap-1.5">

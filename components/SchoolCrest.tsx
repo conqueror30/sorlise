@@ -8,57 +8,17 @@ export function SchoolCrest({
   school: School;
   size?: number;
 }) {
-  if (school.logo) {
-    return (
+  if (!school.logo) return null;
+
+  return (
+    <div className="relative flex items-center justify-center bg-white rounded-full shadow-sm border border-line p-1" style={{ width: size + 8, height: size + 8 }}>
       <Image
         src={school.logo}
         alt={school.name}
         width={size}
         height={size}
-        className="object-contain"
+        className="object-contain rounded-full w-full h-full"
       />
-    );
-  }
-
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 46 46"
-      aria-label={school.name}
-      role="img"
-    >
-      <path
-        d="M23 3 L41 9 V24 C41 34 33 40 23 43 C13 40 5 34 5 24 V9 Z"
-        fill="#fff"
-        stroke={school.color}
-        strokeWidth="2"
-      />
-      <path
-        d="M23 3 L41 9 V24 C41 34 33 40 23 43 C13 40 5 34 5 24 V9 Z"
-        fill={school.color}
-        opacity="0.07"
-      />
-      <line
-        x1="9"
-        y1="17"
-        x2="37"
-        y2="17"
-        stroke={school.color}
-        strokeWidth="1.2"
-        opacity="0.5"
-      />
-      <text
-        x="23"
-        y="30"
-        fontFamily="Georgia, serif"
-        fontWeight="700"
-        fontSize="11"
-        fill={school.color}
-        textAnchor="middle"
-      >
-        {school.short}
-      </text>
-    </svg>
+    </div>
   );
 }

@@ -1,3 +1,10 @@
+export function anonymizeName(name: string): string {
+  return name
+    .split(" ")
+    .map((word) => (word.length <= 2 ? word : word[0] + "*".repeat(word.length - 1)))
+    .join(" ");
+}
+
 export type MentorType = "Fen" | "Anadolu" | "Özel";
 
 export interface Mentor {
@@ -15,14 +22,14 @@ export interface Mentor {
 export const mentors: Mentor[] = [
   {
     id: 1,
-    name: "Arda Yılmaz",
-    initials: "AY",
+    name: "Ahmet Fatih Çalışkan",
+    initials: "AF",
     avatarColor: "#B388F5",
-    school: "İstanbul Fen Lisesi",
-    grade: "10. Sınıf",
+    school: "İstanbul Atatürk Fen Lisesi",
+    grade: "11. Sınıf",
     type: "Fen",
-    subjects: ["Matematik", "Fizik"],
-    bio: "LGS'de %98'lik dilime girdim. Matematik olimpiyatlarına katılıyorum. Fen lisesi hayatı, yurt sistemi ve hazırlık süreci hakkında her şeyi sorabilirsin.",
+    subjects: ["Matematik", "Fizik", "Mekatronik"],
+    bio: "LGS'de 0,16'lık dilime girdim. The Crown #9077 FRC Takımında Mekanik Kaptanlığı yapıyorum. Fen lisesi hayatı, yurt sistemi ve hazırlık süreci hakkında her şeyi sorabilirsin.",
   },
   {
     id: 2,

@@ -101,7 +101,7 @@ export default function KayitPage() {
                   <ArrowLeft size={14} /> Geri
                 </Link>
                 <h1 className="text-3xl font-extrabold tracking-tight text-ink mb-2">
-                  Gönüllü Bul
+                  Ücretsiz Başla
                 </h1>
                 <p className="text-muted text-sm mb-8">
                   Ücretsiz kayıt ol, bugün başla.

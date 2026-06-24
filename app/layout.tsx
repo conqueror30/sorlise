@@ -5,9 +5,9 @@ import "./globals.css";
 const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SorLise — Hedef Liseni Bilen Biriyle Tanış",
+  title: "SorLise | Hedef Liseni Bilen Biriyle Tanış",
   description:
-    "LGS'ye hazırlanan 8. sınıf öğrencilerini seçkin liselerdeki gönüllü öğrencilerle buluşturan Türkiye'nin ilk akran-rehberlik platformu. Ücretsiz, güvenli, bire bir.",
+    "Liseye hazırlanan öğrencileri seçkin liselerdeki gönüllü öğrencilerle buluşturan Türkiye'nin ilk akran-rehberlik platformu. Ücretsiz, güvenli, bire bir.",
 };
 
 export default function RootLayout({

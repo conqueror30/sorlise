@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Building2, BarChart3, Users, Mail } from "lucide-react";
 
 const perks = [
@@ -35,8 +36,9 @@ export function ForSchools() {
           <span className="text-xs font-semibold uppercase tracking-widest text-brand mb-4 block">
             Okullar için
           </span>
-          <h2 className="text-4xl font-extrabold tracking-tight text-white mb-4">
-            SorLise × Okulunuz
+          <h2 className="text-4xl font-extrabold tracking-tight text-white mb-4 flex items-center justify-center gap-1">
+            <Image src="/beyaz_logo.png" alt="SorLise" width={240} height={240} className="h-[140px] w-auto -my-[40px]" />
+            <span>× Okulunuz</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-lg mx-auto">
             Yakında: Liseler ve dershaneler için özel panel. Gönüllü yönetimi,

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { X, Globe, Mail } from "lucide-react";
 
 const links: Record<string, { label: string; href: string }[]> = {
@@ -30,9 +31,14 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-2">
-            <Link href="/" className="text-xl font-extrabold tracking-tight select-none">
-              <span className="text-brand">Sor</span>
-              <span className="text-white">Lise</span>
+            <Link href="/" className="flex items-center select-none">
+              <Image
+                src="/beyaz_logo.png"
+                alt="SorLise"
+                width={240}
+                height={240}
+                className="h-[120px] w-auto -my-[30px] -ml-4"
+              />
             </Link>
             <p className="text-gray-400 text-sm mt-3 leading-relaxed max-w-xs">
               LGS adaylarını seçkin liselerin öğrencileriyle buluşturan

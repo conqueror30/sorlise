@@ -13,7 +13,7 @@ const steps = [
   {
     num: 2,
     Icon: Search,
-    title: "Gönüllü bul",
+    title: "Gönüllü seç",
     desc: "Hedef liseye giden gönüllüleri lise türü, şehir ve derse göre filtrele.",
   },
   {

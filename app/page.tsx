@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { HowItWorks } from "@/components/HowItWorks";
+import { AppHighlights } from "@/components/AppHighlights";
 import { SocialProof } from "@/components/SocialProof";
 import { MentorShowcase } from "@/components/MentorShowcase";
 import { Features } from "@/components/Features";
@@ -17,6 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <HowItWorks />
+        <AppHighlights />
         <SocialProof />
         <MentorShowcase />
         <Features />

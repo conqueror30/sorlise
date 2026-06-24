@@ -9,18 +9,24 @@ import { Navbar } from "@/components/Navbar";
 interface FormData {
   name: string;
   email: string;
+  phone: string;
   school: string;
   grade: string;
   subjects: string;
+  hobbies: string;
+  ib_ap: string;
   motivation: string;
 }
 
 const empty: FormData = {
   name: "",
   email: "",
+  phone: "",
   school: "",
   grade: "",
   subjects: "",
+  hobbies: "",
+  ib_ap: "",
   motivation: "",
 };
 
@@ -140,6 +146,19 @@ export default function MentorOlPage() {
                   </div>
                   <div>
                     <label className="text-xs font-semibold text-ink mb-1.5 block">
+                      Telefon Numarası
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={form.phone}
+                      onChange={update("phone")}
+                      placeholder="05XX XXX XX XX"
+                      className={inputCls}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-ink mb-1.5 block">
                       Okuduğun Lise
                     </label>
                     <input
@@ -171,16 +190,51 @@ export default function MentorOlPage() {
                   </div>
                   <div>
                     <label className="text-xs font-semibold text-ink mb-1.5 block">
-                      Güçlü Derslerin
+                      Güçlü Dersin
+                    </label>
+                    <select
+                      required
+                      value={form.subjects}
+                      onChange={update("subjects")}
+                      className={inputCls + " appearance-none bg-white"}
+                    >
+                      <option value="">Seç...</option>
+                      {["Matematik", "Fen Bilimleri", "Türkçe", "İnkılap Tarihi", "İngilizce", "Din Kültürü", "Tüm Dersler"].map((s) => (
+                        <option key={s} value={s}>
+                          {s}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-ink mb-1.5 block">
+                      Hobilerin
                     </label>
                     <input
                       type="text"
                       required
-                      value={form.subjects}
-                      onChange={update("subjects")}
-                      placeholder="Matematik, Fizik, Kimya"
+                      value={form.hobbies}
+                      onChange={update("hobbies")}
+                      placeholder="Örn: Yüzme, satranç, yazılım..."
                       className={inputCls}
                     />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-ink mb-1.5 block">
+                      IB / AP programında mısın?
+                    </label>
+                    <select
+                      required
+                      value={form.ib_ap}
+                      onChange={update("ib_ap")}
+                      className={inputCls + " appearance-none bg-white"}
+                    >
+                      <option value="">Seç...</option>
+                      <option value="Hayır">Hayır</option>
+                      <option value="Sadece IB">Sadece IB</option>
+                      <option value="Sadece AP">Sadece AP</option>
+                      <option value="İkisi de var">İkisi de var</option>
+                    </select>
                   </div>
                   <div>
                     <label className="text-xs font-semibold text-ink mb-1.5 block">

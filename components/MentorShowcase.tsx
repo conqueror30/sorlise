@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle } from "lucide-react";
-import { mentors, type MentorType } from "@/lib/data";
+import { mentors, anonymizeName, type MentorType } from "@/lib/data";
 
 type FilterValue = "Tümü" | MentorType;
 
@@ -70,14 +71,17 @@ export function MentorShowcase() {
                 className="bg-white rounded-2xl p-6 border border-line shadow-sm"
               >
                 <div className="flex items-start gap-4 mb-4">
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
-                    style={{ backgroundColor: mentor.avatarColor }}
-                  >
-                    {mentor.initials}
+                  <div className="w-12 h-12 rounded-full flex-shrink-0 bg-brand/15 overflow-hidden flex items-center justify-center">
+                    <Image
+                      src="/logo.png"
+                      alt="gönüllü"
+                      width={48}
+                      height={48}
+                      className="w-10 h-10 object-contain"
+                    />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="font-bold text-ink">{mentor.name}</p>
+                    <p className="font-bold text-ink">{anonymizeName(mentor.name)}</p>
                     <p className="text-sm text-muted truncate">{mentor.school}</p>
                     <p className="text-xs text-muted">{mentor.grade}</p>
                   </div>

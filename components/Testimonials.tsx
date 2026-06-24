@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
-import { testimonials } from "@/lib/data";
+import { testimonials, anonymizeName } from "@/lib/data";
 
 export function Testimonials() {
   return (
@@ -47,7 +47,7 @@ export function Testimonials() {
                   {t.initials}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-ink">{t.name}</p>
+                  <p className="text-sm font-semibold text-ink">{anonymizeName(t.name)}</p>
                   <p className="text-xs text-muted">{t.role}</p>
                 </div>
               </div>
