@@ -31,37 +31,50 @@ Ana sayfa hero. Buton sırası: **Hemen İndir** (pembe, brand) → **Gönüllü
 - İki buton da `px-6 py-3.5` — aynı boyut
 
 ### `components/CTASection.tsx`
-Paylaşılan CTA bölümü (hem `/` hem `/ogrenciler` kullanır).
+Paylaşılan CTA bölümü (hem `/` hem `/indir` kullanır).
 - App icon: float animasyonu + scale tap + ripple ring + cursor animasyonu
 - Cursor: `bottom:-4, right:-4` başlangıç, içeri girer, tıklar, çıkar
 
-### `app/ogrenciler/page.tsx`
-Öğrenciler sayfası. Grid: `lg:grid-cols-2`, telefon `order-first lg:order-last` (mobilde üstte, masaüstünde sağda).
+### `app/indir/page.tsx`
+Öğrenciler (Uygulama İndirme) sayfası. Grid: `lg:grid-cols-2`, telefon `order-first lg:order-last` (mobilde üstte, masaüstünde sağda).
 CTA: `<CTASection />` (özel blok değil).
 
-### `app/mentor-ol/page.tsx`
-Mentorlar sayfası.
+### `app/gonullu-ol/page.tsx`
+Gönüllüler sayfası.
+
+### Yasal Sayfalar
+- `/gizlilik`: Gizlilik Politikası
+- `/kvkk`: KVKK Aydınlatma Metni
+- `/kullanim-kosullari`: Kullanım Koşulları
 
 ### `lib/data.ts` · `lib/schools.ts`
 Statik veriler.
 
-## Bugün Yapılanlar (2026-06-24)
+## Bugün Yapılanlar (2026-06-25)
 
-### PhoneAnimation
-- Beyaz boşluk sorunu çözüldü: PNG'nin ekran alanı A=0 (transparan) — mixBlendMode kaldırıldı
-- Ekran div pozisyonu piksel analizi (PowerShell Bitmap.GetPixel) ile kesinleştirildi
-- Responsive wrapper eklendi (mobilde küçülüyor, sm'de tam boyut)
-- Mobilde telefon üste alındı (`order-first lg:order-last`)
-- Chat isimleri: AK → EA (Ece A.)
+### Yasal Sayfalar ve İletişim
+- Footer'daki yasal linkler için 3 yeni sayfa oluşturuldu (`/gizlilik`, `/kvkk`, `/kullanim-kosullari`).
+- İlgili sayfalara KVKK ve mevzuata uygun detaylı Türkçe içerikler eklendi.
+- Projedeki tüm `merhaba@sorlise.com` adresleri `info@sorlise.com` olarak güncellendi.
+- Footer'daki linklerin `#` hedefleri, oluşturulan gerçek yasal sayfa URL'leri ile güncellendi.
 
-### Hero
-- "Ücretsiz Başla" → "Hemen İndir" (pembe/brand rengi, app icon + cursor animasyon)
-- "Gönüllü Ol" beyaz, siyah border-2, aynı boyut
-- Buton sırası: Hemen İndir önce, Gönüllü Ol sonra
+### Rota ve Adlandırma Güncellemeleri
+- `app/mentor-ol` klasörü `app/gonullu-ol` olarak değiştirildi.
+- `app/ogrenciler` klasörü `app/indir` olarak değiştirildi.
+- Navbar, Hero, CTASection, MentorShowcase, AppHighlights, Footer ve ForMentors bileşenlerindeki eski `/mentor-ol` ve `/ogrenciler` linkleri `/gonullu-ol` ve `/indir` olarak güncellendi.
+- Mentorlar bölümünün `#mentorlar` olan ID'si `#gonulluler` olarak değiştirildi. Linkler de aynı şekilde `#gonulluler` oldu.
 
-### CTASection
-- App icon'a cursor + ripple animasyonu eklendi
-- `/ogrenciler` sayfasındaki özel CTA bloku → `<CTASection />` ile değiştirildi
+### Navbar Düzenlemeleri
+- "Öğrenciler İçin" ve sonrasında "Uygulama" linki Navbar'dan kaldırıldı. Navigasyon artık: Nasıl Çalışır · Gönüllüler · Okullar İçin.
+- `/indir` sayfası navbar'ı genişletildi ve diğer section'lar için yönlendirme eklendi (`/#nasil-calisir`, `/#gonulluler`, `/#okullar`).
+
+### Diğer Düzeltmeler
+- Hero komponentindeki "Ahmet Fatih" ismi "A**** F****" olarak anonimleştirildi.
+
+## Geçmiş Yapılanlar (2026-06-24)
+- PhoneAnimation: beyaz boşluk sorunu çözüldü, ekran pozisyonu kesinleştirildi, responsive yapıldı. Chat isimleri güncellendi (AK → EA).
+- Hero: "Ücretsiz Başla" → "Hemen İndir" buton tasarımı güncellendi.
+- CTASection: Ripple animasyonu eklendi, paylaşılan yapıya geçirildi.
 
 ## Framer Motion — Cursor+Ripple Animasyonu Şablonu
 ```tsx
