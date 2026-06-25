@@ -92,7 +92,7 @@ export function ForMentors() {
             ))}
           </ul>
 
-          <Link href="/mentor-ol">
+          <Link href="/gonullu-ol">
             <motion.button
               className="bg-ink text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-surface transition-colors cursor-pointer"
               whileHover={{ scale: 1.03 }}

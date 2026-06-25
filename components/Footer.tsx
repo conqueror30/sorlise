@@ -5,11 +5,11 @@ import { X, Globe, Mail } from "lucide-react";
 const links: Record<string, { label: string; href: string }[]> = {
   Platform: [
     { label: "Nasıl Çalışır", href: "#nasil-calisir" },
-    { label: "Gönüllüler", href: "#mentorlar" },
+    { label: "Gönüllüler", href: "#gonulluler" },
     { label: "Özellikler", href: "#ozellikler" },
   ],
   Gönüllüler: [
-    { label: "Gönüllü Ol", href: "/mentor-ol" },
+    { label: "Gönüllü Ol", href: "/gonullu-ol" },
     { label: "Rozet & Sertifika", href: "#hakkinda" },
 
   ],
@@ -18,9 +18,9 @@ const links: Record<string, { label: string; href: string }[]> = {
     { label: "İletişim", href: "mailto:okullar@sorlise.com" },
   ],
   Yasal: [
-    { label: "Gizlilik Politikası", href: "#" },
-    { label: "KVKK", href: "#" },
-    { label: "Kullanım Koşulları", href: "#" },
+    { label: "Gizlilik Politikası", href: "/gizlilik" },
+    { label: "KVKK", href: "/kvkk" },
+    { label: "Kullanım Koşulları", href: "/kullanim-kosullari" },
   ],
 };
 
@@ -60,7 +60,7 @@ export function Footer() {
                 <Globe size={18} />
               </a>
               <a
-                href="mailto:merhaba@sorlise.com"
+                href="mailto:info@sorlise.com"
                 className="text-gray-500 hover:text-brand transition-colors"
                 aria-label="E-posta"
               >

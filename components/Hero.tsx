@@ -7,7 +7,7 @@ import Image from "next/image";
 const cards = [
   {
     initials: "AF",
-    name: "Ahmet Fatih",
+    name: "A**** F****",
     school: "İstanbul Atatürk Fen Lisesi",
     type: "Fen Lisesi",
     subjects: ["Matematik", "Fizik"],
@@ -131,7 +131,7 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <Link href="/ogrenciler">
+            <Link href="/indir">
               <motion.button
                 className="flex items-center gap-3 bg-brand text-ink font-semibold px-6 py-3.5 rounded-xl hover:bg-brand-dark transition-colors cursor-pointer shadow-md"
                 whileHover={{ scale: 1.03 }}
@@ -143,28 +143,34 @@ export function Hero() {
                 <motion.div
                   className="relative w-9 h-9 bg-white rounded-xl flex items-center justify-center flex-shrink-0"
                   animate={{ scale: [1, 1, 1, 0.88, 1.06, 1] }}
-                  transition={{ duration: 2.6, repeat: Infinity, repeatDelay: 1.8,
-                    times: [0, 0.3, 0.44, 0.54, 0.66, 1], ease: "easeInOut" }}
+                  transition={{
+                    duration: 2.6, repeat: Infinity, repeatDelay: 1.8,
+                    times: [0, 0.3, 0.44, 0.54, 0.66, 1], ease: "easeInOut"
+                  }}
                 >
                   <Image src="/logo.png" alt="SorLise" width={26} height={26} className="object-contain" />
 
                   {/* Ripple ring expanding from tap */}
                   <motion.span
-                    style={{ position:"absolute", inset:0, borderRadius:"inherit",
-                      border:"2px solid rgba(179,136,245,0.7)", pointerEvents:"none" }}
+                    style={{
+                      position: "absolute", inset: 0, borderRadius: "inherit",
+                      border: "2px solid rgba(179,136,245,0.7)", pointerEvents: "none"
+                    }}
                     animate={{ scale: [1, 1, 1, 1.8, 1.8], opacity: [0, 0, 0.8, 0, 0] }}
-                    transition={{ duration: 2.6, repeat: Infinity, repeatDelay: 1.8,
-                      times: [0, 0.44, 0.52, 0.72, 1], ease: "easeOut" }}
+                    transition={{
+                      duration: 2.6, repeat: Infinity, repeatDelay: 1.8,
+                      times: [0, 0.44, 0.52, 0.72, 1], ease: "easeOut"
+                    }}
                   />
 
                   {/* Cursor: glides in from bottom-right, taps, fades out */}
                   <motion.div
-                    style={{ position:"absolute", bottom:-2, right:-2, pointerEvents:"none", zIndex:20 }}
+                    style={{ position: "absolute", bottom: -2, right: -2, pointerEvents: "none", zIndex: 20 }}
                     animate={{
-                      x:       [22,  22,   2,   2,   2,  22],
-                      y:       [22,  22,   2,   2,   2,  22],
-                      scale:   [1,    1,   1, 0.7,   1,   1],
-                      opacity: [0,    0,   1,   1,   1,   0],
+                      x: [22, 22, 2, 2, 2, 22],
+                      y: [22, 22, 2, 2, 2, 22],
+                      scale: [1, 1, 1, 0.7, 1, 1],
+                      opacity: [0, 0, 1, 1, 1, 0],
                     }}
                     transition={{
                       duration: 2.6,
@@ -176,13 +182,13 @@ export function Hero() {
                   >
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
                       <path d="M3.5 2L18 11L11.8 13L9.2 19.5L3.5 2Z"
-                        fill="white" stroke="#111827" strokeWidth="1.4" strokeLinejoin="round"/>
+                        fill="white" stroke="#111827" strokeWidth="1.4" strokeLinejoin="round" />
                     </svg>
                   </motion.div>
                 </motion.div>
               </motion.button>
             </Link>
-            <Link href="/mentor-ol">
+            <Link href="/gonullu-ol">
               <motion.button
                 className="bg-white text-ink font-semibold px-6 py-3.5 rounded-xl border-2 border-ink hover:bg-brand/10 transition-colors shadow-sm cursor-pointer"
                 whileHover={{ scale: 1.03 }}

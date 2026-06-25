@@ -22,7 +22,7 @@ export function MentorShowcase() {
     active === "Tümü" ? mentors : mentors.filter((m) => m.type === active);
 
   return (
-    <section id="mentorlar" className="py-24 bg-bg">
+    <section id="gonulluler" className="py-24 bg-bg">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           className="text-center mb-12"
@@ -105,10 +105,13 @@ export function MentorShowcase() {
                   {mentor.bio}
                 </p>
 
-                <button className="w-full flex items-center justify-center gap-2 bg-brand/20 text-brand-dark font-semibold text-sm py-2.5 rounded-xl hover:bg-brand hover:text-ink transition-colors cursor-pointer">
+                <a
+                  href="/indir"
+                  className="w-full flex items-center justify-center gap-2 bg-brand/20 text-brand-dark font-semibold text-sm py-2.5 rounded-xl hover:bg-brand hover:text-ink transition-colors cursor-pointer"
+                >
                   <MessageCircle size={15} />
                   Sohbet Et
-                </button>
+                </a>
               </motion.div>
             ))}
           </AnimatePresence>

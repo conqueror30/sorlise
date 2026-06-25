@@ -91,7 +91,7 @@ export function CTASection() {
               viewport={{ once: true }}
               transition={{ delay: 0.35, duration: 0.6 }}
             >
-              <Link href="/ogrenciler">
+              <Link href="/indir">
                 <motion.div
                   className="flex items-center gap-3 bg-white text-ink px-6 py-3.5 rounded-2xl hover:shadow-xl transition-all cursor-pointer shadow-md border border-black/10"
                   whileHover={{ scale: 1.05, y: -3 }}
@@ -111,7 +111,7 @@ export function CTASection() {
                 </motion.div>
               </Link>
 
-              <Link href="/ogrenciler">
+              <Link href="/indir">
                 <motion.div
                   className="flex items-center gap-3 bg-white text-ink px-6 py-3.5 rounded-2xl hover:shadow-xl transition-all cursor-pointer shadow-md border border-black/10"
                   whileHover={{ scale: 1.05, y: -3 }}

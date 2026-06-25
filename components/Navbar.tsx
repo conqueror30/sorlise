@@ -8,13 +8,15 @@ import { usePathname } from "next/navigation";
 
 const mainLinks = [
   { label: "Nasıl Çalışır", href: "#nasil-calisir" },
-  { label: "Öğrenciler İçin", href: "/ogrenciler" },
-  { label: "Gönüllüler", href: "#mentorlar" },
+  { label: "Gönüllüler", href: "#gonulluler" },
   { label: "Okullar İçin", href: "#okullar" },
 ];
 
-const ogrencilerLinks = [
+const indirLinks = [
   { label: "Ana Sayfa", href: "/" },
+  { label: "Nasıl Çalışır", href: "/#nasil-calisir" },
+  { label: "Gönüllüler", href: "/#gonulluler" },
+  { label: "Okullar İçin", href: "/#okullar" },
 ];
 
 export function Navbar() {
@@ -22,8 +24,8 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
-  const isOgrenciler = pathname === "/ogrenciler";
-  const navLinks = isOgrenciler ? ogrencilerLinks : mainLinks;
+  const isIndir = pathname === "/indir";
+  const navLinks = isIndir ? indirLinks : mainLinks;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -68,13 +70,13 @@ export function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
           <Link
-            href="/mentor-ol"
+            href="/gonullu-ol"
             className="text-sm font-medium text-muted hover:text-ink transition-colors px-3 py-2"
           >
             Gönüllü Ol
           </Link>
           <Link
-            href="/ogrenciler"
+            href="/indir"
             className="text-sm font-semibold bg-brand text-ink px-4 py-2 rounded-xl hover:bg-brand-dark transition-colors"
           >
             Hemen İndir
@@ -105,11 +107,11 @@ export function Navbar() {
             </Link>
           ))}
           <Link
-            href="/ogrenciler"
+            href="/indir"
             className="text-sm font-semibold bg-brand text-ink px-4 py-3 rounded-xl text-center hover:bg-brand-dark transition-colors"
             onClick={() => setMobileOpen(false)}
           >
-            Ücretsiz Başla
+            Hemen İndir
           </Link>
         </div>
       )}

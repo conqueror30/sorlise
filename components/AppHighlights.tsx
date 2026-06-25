@@ -28,10 +28,10 @@ function ChatMockup() {
       {/* Header */}
       <div className="flex items-center gap-3 mb-4 pb-4 border-b border-line">
         <div className="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center text-white text-sm font-bold">
-          AK
+          SK
         </div>
         <div>
-          <p className="text-sm font-bold text-ink">Ahmet K.</p>
+          <p className="text-sm font-bold text-ink">Salih K.</p>
           <div className="flex items-center gap-1.5">
             <div className="w-2 h-2 rounded-full bg-green-400" />
             <p className="text-xs text-muted">Çevrimiçi · Ankara Fen</p>
@@ -42,11 +42,11 @@ function ChatMockup() {
       <div className="space-y-3">
         <div className="flex gap-2">
           <div className="w-7 h-7 rounded-full flex-shrink-0 bg-brand-dark flex items-center justify-center text-white text-[10px] font-bold mt-0.5">
-            AK
+            SK
           </div>
           <div className="bg-bg rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[190px]">
             <p className="text-xs text-ink leading-relaxed">
-              Fen Lisesi gerçekten bu kadar zor mu?
+              Merhaba nasıl yardımcı olabilirim?
             </p>
           </div>
         </div>
@@ -56,17 +56,17 @@ function ChatMockup() {
           </div>
           <div className="bg-brand/15 rounded-2xl rounded-tr-sm px-3.5 py-2.5 max-w-[190px]">
             <p className="text-xs text-brand-dark leading-relaxed">
-              İlk ay zor geliyor, sonra alışıyorsun 😊
+              Fen Lisesi gerçekten bu kadar zor mu? Sosyal hayat nasıl?
             </p>
           </div>
         </div>
         <div className="flex gap-2">
           <div className="w-7 h-7 rounded-full flex-shrink-0 bg-brand-dark flex items-center justify-center text-white text-[10px] font-bold mt-0.5">
-            AK
+            SK
           </div>
           <div className="bg-bg rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[190px]">
             <p className="text-xs text-ink leading-relaxed">
-              Peki sosyal hayat nasıl? 🙂
+              İlk ay zor geliyor, sonra alışıyorsun 😊
             </p>
           </div>
         </div>
@@ -147,7 +147,7 @@ export function AppHighlights() {
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
             >
-              <Link href="/ogrenciler">
+              <Link href="/indir">
                 <motion.button
                   className="bg-brand text-ink font-semibold px-6 py-3.5 rounded-xl hover:bg-brand-dark transition-colors cursor-pointer"
                   whileHover={{ scale: 1.03 }}
