@@ -12,7 +12,6 @@ interface FormData {
   phone: string;
   school: string;
   grade: string;
-  subjects: string;
   hobbies: string;
   ib_ap: string;
   motivation: string;
@@ -24,7 +23,6 @@ const empty: FormData = {
   phone: "",
   school: "",
   grade: "",
-  subjects: "",
   hobbies: "",
   ib_ap: "",
   motivation: "",
@@ -184,24 +182,6 @@ export default function MentorOlPage() {
                       {["9", "10", "11", "12"].map((g) => (
                         <option key={g} value={g}>
                           {g}. Sınıf
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-xs font-semibold text-ink mb-1.5 block">
-                      Güçlü Dersin
-                    </label>
-                    <select
-                      required
-                      value={form.subjects}
-                      onChange={update("subjects")}
-                      className={inputCls + " appearance-none bg-white"}
-                    >
-                      <option value="">Seç...</option>
-                      {["Matematik", "Fen Bilimleri", "Türkçe", "İnkılap Tarihi", "İngilizce", "Din Kültürü", "Tüm Dersler"].map((s) => (
-                        <option key={s} value={s}>
-                          {s}
                         </option>
                       ))}
                     </select>
