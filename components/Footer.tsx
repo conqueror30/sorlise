@@ -19,7 +19,6 @@ const links: Record<string, { label: string; href: string }[]> = {
   ],
   Yasal: [
     { label: "Gizlilik Politikası", href: "/gizlilik" },
-    { label: "KVKK", href: "/kvkk" },
     { label: "Kullanım Koşulları", href: "/kullanim-kosullari" },
   ],
 };

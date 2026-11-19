@@ -44,7 +44,7 @@ Gönüllüler sayfası.
 
 ### Yasal Sayfalar
 - `/gizlilik`: Gizlilik Politikası
-- `/kvkk`: KVKK Aydınlatma Metni
+- (`/kvkk` kaldırıldı → `next.config.ts` ile `/gizlilik`'e 301 yönlendirme)
 - `/kullanim-kosullari`: Kullanım Koşulları
 
 ### `lib/data.ts` · `lib/schools.ts`

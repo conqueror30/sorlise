@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.join(__dirname),
   },
+  // /kvkk sayfası kaldırıldı; eski linkler gizlilik politikasına yönlensin.
+  async redirects() {
+    return [{ source: "/kvkk", destination: "/gizlilik", permanent: true }];
+  },
 };
 
 export default nextConfig;

@@ -200,13 +200,13 @@ export default function KayitPage() {
 
                 <p className="text-xs text-muted text-center mt-6">
                   Kayıt olarak{" "}
-                  <span className="underline cursor-pointer">
+                  <Link href="/gizlilik" target="_blank" className="underline">
                     Gizlilik Politikamızı
-                  </span>{" "}
+                  </Link>{" "}
                   ve{" "}
-                  <span className="underline cursor-pointer">
-                    KVKK Aydınlatma Metnini
-                  </span>{" "}
+                  <Link href="/kullanim-kosullari" target="_blank" className="underline">
+                    Kullanım Koşullarını
+                  </Link>{" "}
                   kabul etmiş olursunuz.
                 </p>
               </motion.div>

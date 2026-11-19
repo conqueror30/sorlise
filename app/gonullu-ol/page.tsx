@@ -245,13 +245,13 @@ export default function MentorOlPage() {
 
                 <p className="text-xs text-muted text-center mt-6">
                   Başvurarak{" "}
-                  <span className="underline cursor-pointer">
-                    Gönüllü Katılım Koşullarını
-                  </span>{" "}
+                  <Link href="/kullanim-kosullari" target="_blank" className="underline">
+                    Kullanım Koşullarını
+                  </Link>{" "}
                   ve{" "}
-                  <span className="underline cursor-pointer">
-                    KVKK Aydınlatma Metnini
-                  </span>{" "}
+                  <Link href="/gizlilik" target="_blank" className="underline">
+                    Gizlilik Politikasını
+                  </Link>{" "}
                   kabul etmiş olursunuz.
                 </p>
               </motion.div>
