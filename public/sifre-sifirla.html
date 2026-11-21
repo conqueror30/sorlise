@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Şifre Sıfırlama — Sorlise</title>
+<!--
+  Target of the password-reset email (Supabase → Authentication → Emails →
+  Reset Password links here with ?token_hash=…&type=recovery). The token is
+  only redeemed when the user submits, so mail scanners that open the link
+  don't use it up. Upload to sorlise.com as sifre-sifirla/index.html.
+-->
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #F8F5FF;
+    --card: #FFFFFF;
+    --text: #1A1425;
+    --text-secondary: #5B5468;
+    --accent: #7C4FD6;
+    --border: #E5DDFB;
+    --error: #D6336C;
+    --success: #2F9E44;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E0B1C;
+      --card: #17132A;
+      --text: #F2EEFB;
+      --text-secondary: #B4ACC9;
+      --accent: #C084FC;
+      --border: #2C2545;
+      --error: #FF6B9A;
+      --success: #69DB7C;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+  }
+  h1 {
+    font-size: 26px;
+    font-weight: 800;
+    margin: 0 0 8px;
+  }
+  .sub {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin: 0 0 24px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+  input {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  button {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px;
+    border: 0;
+    border-radius: 100px;
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+  }
+  button:disabled { opacity: 0.6; cursor: default; }
+  .hint { color: var(--text-secondary); font-size: 13px; margin: -8px 0 16px; }
+  .msg { font-size: 15px; margin: 16px 0 0; }
+  .msg.error { color: var(--error); }
+  .msg.success { color: var(--success); }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Şifreni Yenile</h1>
+  <p class="sub">Sorlise hesabın için yeni bir şifre belirle.</p>
+
+  <div class="card">
+    <form id="form">
+      <label for="password">Yeni şifre</label>
+      <input id="password" type="password" autocomplete="new-password" required>
+      <p class="hint">En az 10 karakter; en az bir harf ve bir rakam içermeli.</p>
+
+      <label for="confirm">Yeni şifre (tekrar)</label>
+      <input id="confirm" type="password" autocomplete="new-password" required>
+
+      <button id="submit" type="submit">Şifremi Güncelle</button>
+    </form>
+    <p id="msg" class="msg hidden"></p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js"></script>
+<script>
+  // Same project and public key as the app (they ship inside it anyway).
+  var SUPABASE_URL = 'https://ljuluwgfykatmijarjyr.supabase.co';
+  var SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_UQ_tLDIrE0GHWD_h_rBfJg_rJDQsjdj';
+
+  var client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+  });
+
+  var params = new URLSearchParams(window.location.search);
+  var tokenHash = params.get('token_hash');
+  var form = document.getElementById('form');
+  var button = document.getElementById('submit');
+  var msg = document.getElementById('msg');
+  // The one-time token is redeemed on the first submit; if the password is
+  // then rejected, later attempts reuse the session instead of the token.
+  var verifiedUser = null;
+
+  function show(text, kind) {
+    msg.textContent = text;
+    msg.className = 'msg ' + kind;
+  }
+
+  var LINK_INVALID = 'Bu bağlantı geçersiz veya süresi dolmuş. Uygulamada "Şifremi Unuttum"a tekrar dokunup gelen en son e-postadaki bağlantıyı kullan.';
+
+  if (!tokenHash) {
+    form.className = 'hidden';
+    show(LINK_INVALID, 'error');
+  }
+
+  // Mirrors validatePassword in the app's register screen.
+  function passwordProblem(password) {
+    if (password.length < 10) return 'Şifre en az 10 karakter olmalıdır.';
+    if (!/[A-Za-zÇĞİÖŞÜçğıöşü]/.test(password)) return 'Şifre en az bir harf içermelidir.';
+    if (!/[0-9]/.test(password)) return 'Şifre en az bir rakam içermelidir.';
+    return null;
+  }
+
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    var password = document.getElementById('password').value;
+    var confirm = document.getElementById('confirm').value;
+
+    var problem = passwordProblem(password);
+    if (problem) return show(problem, 'error');
+    if (password !== confirm) return show('Şifreler eşleşmiyor.', 'error');
+
+    button.disabled = true;
+    try {
+      if (!verifiedUser) {
+        var verify = await client.auth.verifyOtp({ token_hash: tokenHash, type: 'recovery' });
+        if (verify.error || !verify.data.user) {
+          form.className = 'hidden';
+          return show(LINK_INVALID, 'error');
+        }
+        verifiedUser = verify.data.user;
+      }
+
+      var update = await client.auth.updateUser({ password: password });
+      if (update.error) {
+        var text = update.error.code === 'same_password'
+          ? 'Yeni şifren eskisinden farklı olmalı.'
+          : update.error.code === 'weak_password'
+            ? 'Bu şifre çok zayıf. Daha güçlü bir şifre seç.'
+            : 'Şifre güncellenemedi. Lütfen tekrar dene.';
+        return show(text, 'error');
+      }
+
+      // A reset usually means the password leaked or a phone was lost: unbind
+      // the device that gets this account's chat previews and end every
+      // session, so a lost phone is signed out too.
+      await client.from('profiles_private')
+        .update({ push_token: null, app_active: false, active_chat_id: null })
+        .eq('profile_id', verifiedUser.id);
+      await client.auth.signOut({ scope: 'global' });
+      form.className = 'hidden';
+      show((verifiedUser.email ? verifiedUser.email + ' hesabının şifresi güncellendi. ' : 'Şifren güncellendi. ')
+        + 'Güvenliğin için tüm cihazlarda oturum kapatıldı; uygulamaya dönüp yeni şifrenle giriş yap.', 'success');
+    } catch (e) {
+      show('Bağlantı kurulamadı. İnternet bağlantını kontrol edip tekrar dene.', 'error');
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

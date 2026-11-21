@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Veli Onayı — Sorlise</title>
+<!--
+  Target of the parent-approval email (supabase/functions/send-parent-consent
+  links here with ?token=…). Opening the page only shows which child asked;
+  approval happens when the parent presses the button, so mail scanners that
+  open links can't approve. Talks to the verify-parental-consent function.
+  Upload to sorlise.com as veli-onayi/index.html.
+-->
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #F8F5FF;
+    --card: #FFFFFF;
+    --text: #1A1425;
+    --text-secondary: #5B5468;
+    --accent: #7C4FD6;
+    --border: #E5DDFB;
+    --error: #D6336C;
+    --success: #2F9E44;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E0B1C;
+      --card: #17132A;
+      --text: #F2EEFB;
+      --text-secondary: #B4ACC9;
+      --accent: #C084FC;
+      --border: #2C2545;
+      --error: #FF6B9A;
+      --success: #69DB7C;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+  }
+  h1 {
+    font-size: 26px;
+    font-weight: 800;
+    margin: 0 0 8px;
+  }
+  .sub {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin: 0 0 24px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .card p { margin: 0 0 12px; font-size: 15px; }
+  .card ul { margin: 0 0 16px; padding-left: 20px; color: var(--text-secondary); font-size: 14px; }
+  .card li { margin-bottom: 6px; }
+  .child { font-weight: 700; }
+  a { color: var(--accent); }
+  button {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px;
+    border: 0;
+    border-radius: 100px;
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+  }
+  button:disabled { opacity: 0.6; cursor: default; }
+  .note { color: var(--text-secondary); font-size: 13px; margin: 12px 0 0; }
+  .msg { font-size: 15px; margin: 0; }
+  .msg.error { color: var(--error); }
+  .msg.success { color: var(--success); }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Veli Onayı</h1>
+  <p class="sub">Sorlise — LGS'den liseye güvenli köprü</p>
+
+  <div class="card">
+    <p id="loading">Yükleniyor...</p>
+
+    <div id="ask" class="hidden">
+      <p><span id="child" class="child"></span> adlı öğrencinin Sorlise hesabı için veli onayınız isteniyor.</p>
+      <p>Onay verdiğinizde, e-postada yazan şu maddeleri kabul etmiş olursunuz:</p>
+      <ul>
+        <li>Çocuğunuzun hesap, profil ve mesaj bilgilerinin hizmetin sunulması için işlenmesi ve saklanması; verilerin satılmaması ve reklam için kullanılmaması.</li>
+        <li>Çocuğunuzun doğrulanmış lise öğrencileriyle (buddy) uygulama içinden mesajlaşabilmesi. Telefon, adres ve sosyal medya paylaşımı otomatik olarak engellenir.</li>
+      </ul>
+      <p class="note" style="margin: 0 0 16px;">
+        Ayrıntılar: <a href="https://sorlise.com/gizlilik">Gizlilik Politikası ve KVKK Aydınlatma Metni</a>
+        · <a href="https://sorlise.com/kullanim-kosullari">Kullanım Koşulları</a>
+      </p>
+      <button id="approve" type="button">Onaylıyorum</button>
+      <p class="note">Bu öğrenci sizin çocuğunuz değilse veya bu kaydı tanımıyorsanız bu sayfayı kapatabilirsiniz; hesap onaylanmaz.</p>
+    </div>
+
+    <p id="msg" class="msg hidden"></p>
+  </div>
+</div>
+
+<script>
+  var FUNCTION_URL = 'https://ljuluwgfykatmijarjyr.supabase.co/functions/v1/verify-parental-consent';
+  var token = new URLSearchParams(window.location.search).get('token') || '';
+
+  var loading = document.getElementById('loading');
+  var ask = document.getElementById('ask');
+  var child = document.getElementById('child');
+  var button = document.getElementById('approve');
+  var msg = document.getElementById('msg');
+
+  var MESSAGES = {
+    approved: ['Onay verildi! Çocuğunuzun Sorlise hesabı aktifleştirildi. Bu sayfayı kapatabilirsiniz.', 'success'],
+    already: ['Bu hesap için onay daha önce verilmiş. Çocuğunuz uygulamayı kullanabilir.', 'success'],
+    expired: ['Bu bağlantının süresi dolmuş. Çocuğunuzdan uygulamadan yeni bir onay e-postası göndermesini isteyin.', 'error'],
+    replaced: ['Bu bağlantının yerine daha yeni bir onay e-postası gönderildi. Lütfen en son gelen e-postadaki bağlantıyı kullanın.', 'error'],
+    invalid: ['Bu bağlantı geçersiz. Lütfen e-postadaki bağlantıyı eksiksiz kullandığınızdan emin olun.', 'error'],
+    error: ['Bir hata oluştu. Lütfen biraz sonra tekrar deneyin.', 'error'],
+  };
+
+  function showStatus(status) {
+    var m = MESSAGES[status] || MESSAGES.error;
+    loading.className = 'hidden';
+    ask.className = 'hidden';
+    msg.textContent = m[0];
+    msg.className = 'msg ' + m[1];
+  }
+
+  function call(action) {
+    return fetch(FUNCTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: token, action: action }),
+    }).then(function (res) { return res.json(); });
+  }
+
+  if (!/^[0-9a-f]{64}$/.test(token)) {
+    showStatus('invalid');
+  } else {
+    call('preview').then(function (data) {
+      if (data.status !== 'pending') return showStatus(data.status);
+      child.textContent = data.child_name || 'Çocuğunuz';
+      loading.className = 'hidden';
+      ask.className = '';
+    }).catch(function () { showStatus('error'); });
+  }
+
+  button.addEventListener('click', function () {
+    button.disabled = true;
+    call('approve')
+      .then(function (data) { showStatus(data.status); })
+      .catch(function () {
+        button.disabled = false;
+        msg.textContent = 'Bağlantı kurulamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.';
+        msg.className = 'msg error';
+      });
+  });
+</script>
+</body>
+</html>

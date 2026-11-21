@@ -47,6 +47,13 @@ Gönüllüler sayfası.
 - (`/kvkk` kaldırıldı → `next.config.ts` ile `/gizlilik`'e 301 yönlendirme)
 - `/kullanim-kosullari`: Kullanım Koşulları
 
+### Uygulamanın kullandığı statik sayfalar (`public/`)
+Kaynakları `web/` klasöründe (uygulama reposundan gelir); değişince `public/`'e tekrar kopyala.
+- `public/veli-onayi.html` → `/veli-onayi` (veli onay e-postası, `?token=`)
+- `public/sifre-sifirla.html` → `/sifre-sifirla` (şifre sıfırlama e-postası, `?token_hash=`)
+- `public/.well-known/assetlinks.json` (Android App Links)
+- Uzantısız adresler `next.config.ts` içindeki `rewrites` ile çalışır. Bu adresleri değiştirme, uygulama ve e-postalar bunlara link veriyor.
+
 ### `lib/data.ts` · `lib/schools.ts`
 Statik veriler.
 

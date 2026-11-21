@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.sorlise.app",
+      "sha256_cert_fingerprints": [
+        "61:D3:1F:64:69:DA:4D:73:E6:3D:41:3D:42:CB:0C:86:1E:9E:64:4C:41:39:47:55:C9:72:C3:98:58:06:CD:47"
+      ]
+    }
+  }
+]

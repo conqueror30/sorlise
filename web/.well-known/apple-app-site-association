@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["APPLE_TEAM_ID.com.sorlise.app"],
+        "components": [
+          { "/": "/sifre-sifirla*", "comment": "Password reset link from the email" }
+        ]
+      }
+    ]
+  }
+}

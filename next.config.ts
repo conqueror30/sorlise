@@ -12,6 +12,15 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [{ source: "/kvkk", destination: "/gizlilik", permanent: true }];
   },
+  // Uygulama ve e-postalar bu sayfalara uzantısız adresle link veriyor
+  // (sorlise.com/veli-onayi?token=…), dosyalar ise public/ altında .html.
+  // Rewrite olduğu için adres çubuğu ve query string aynı kalır.
+  async rewrites() {
+    return [
+      { source: "/veli-onayi", destination: "/veli-onayi.html" },
+      { source: "/sifre-sifirla", destination: "/sifre-sifirla.html" },
+    ];
+  },
 };
 
 export default nextConfig;
